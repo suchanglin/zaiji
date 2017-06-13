@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 事件冒泡</title>
+    <style>
+        input[type="button"] {
+            width: 100px;
+            font-size: 20px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #0f0;
+            outline: none;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <input type="button" value="按钮1" id="btn1">
+    </div>
+    <script>
+        // Dom 2级事件
+        var btn1 = document.getElementById("btn1");
+        btn1.addEventListener("click",showMsg,false);  //此处可以直接匿名函数：（"click",function(){alert（this.value）;},false）;
+        function showMsg() {
+            alert(this.value);
+        }
+        // 实现跨浏览器事件处理程序
+        var eventUtil = {
+              //添加句柄
+            addHandler: function(element, type, handler) {
+                if (element.addEventListener) {
+                    element.addEventListener(type, handler, false);
+                } else if (element.attachEvent) {
+                    element.attachEvent('on' + type, handler);
+                } else {
+                    element['on' + type] = handler;
+                }
+            },
+            removeHandler: function(element, type, handler) {
+                
+                   //删除句柄
+                  if (element.removeEventListener) {
+                    element.removeEventListener(type, handler, false);
+                } else if (element.detachEvent) {
+                    element.detachEvent('on' + type, handler);
+                } else {
+                    element['on' + type] = handler;
+                }
+            }
+        }
+        eventUtil.addEvent(btn1,'click',showMsg);
+        // eventUtil.removeEvent(btn1,'click',showMsg);
+    </script>
+</body>
+
+</html>
