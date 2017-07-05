@@ -1,0 +1,71 @@
+要求
+有一条可爱的小狗(名字叫“小狗狗”)，它的叫声很好听(wow)，每次看到主人的时候就会乖乖叫(yelp)。
+
+另一只小狗精力很旺盛（名字叫做“精力旺盛的狗狗”），每隔5秒叫唤(yelp)一声(wow)。
+
+
+
+
+使用面向对象的混合模式实现小狗的创建
+function Dog() {
+    this.name = '小狗狗';
+    this.wow = 'wow';
+}
+Dog.prototype.yelp = function() {
+    console.log(this.wow);
+}
+
+
+
+
+精力旺盛的狗狗继承狗狗的基本特点
+使用call实现属性的继承，使用for-in循环实现功能/方法的继承
+
+function MadDog() {
+    Dog.call(this);
+    this.name = '精力旺盛的狗狗';
+}
+for (var i in Dog.prototype) {
+    MadDog.prototype[i] = Dog.prototype[i];
+};
+
+
+
+实现方法的重写
+MadDog.prototype.yelp = function () {
+    var _this = this;
+    setInterval(function(){
+        console.log(_this.wow);
+    }, 5000);
+}
+
+
+
+
+
+
+完整版代码
+
+function Dog() {
+    this.name = '小狗狗';
+    this.wow = 'wow';
+}
+Dog.prototype.yelp = function() {
+    console.log(this.wow);
+}
+ 
+function MadDog() {
+    Dog.call(this);
+    this.name = '精力旺盛的狗狗';
+}
+for (var i in Dog.prototype) {
+    MadDog.prototype[i] = Dog.prototype[i];
+};
+MadDog.prototype.yelp = function () {
+    var _this = this;
+    setInterval(function(){
+        console.log(_this.wow);
+    }, 5000);
+}
+var dog = new MadDog();
+dog.yelp();
