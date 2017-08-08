@@ -1,0 +1,57 @@
+javascript 函数有4 中调用方式，this指向函数执行时的当前对象。
+
+1作为一个函数调用。
+
+function myFunction(a, b) {
+    return a * b;
+}
+
+myFunction(10, 2);    // 
+
+当函数没有被自身的对象调用时，this的值就会变成全局对象：浏览器窗口。
+
+2函数作为方法调用。
+ 
+var myObject = {
+    firstName:"John",
+    lastName: "Doe",
+    fullName: function () {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+myObject.fullName()； //
+
+
+
+3使用构造函数调用函数。
+
+unction myFunction(arg1, arg2) {
+    this.firstName = arg1;
+    this.lastName  = arg2;
+}
+
+// This creates a new object
+var x = new myFunction("John","Doe");
+x.firstName;     //
+
+4作为函数方法调用函数。  
+
+call()和apply()是预定义的函数方法。两个方法可用于调用函数，两个方法的第一个参数必须是对象本身。
+
+function myFunction(a, b) {
+    return a * b;
+}
+myFunction.call(myObject, 10, 2);   //
+
+
+
+function myFunction(a, b) {
+    return a * b;
+}
+myArray = [10,2];
+myFunction.apply(myObject, myArray);  //
+
+在 JavaScript 严格模式(strict mode)下, 在调用函数时第一个参数会成为 this 的值， 即使该参数不是一个对象。
+在 JavaScript 非严格模式(non-strict mode)下, 如果第一个参数的值是 null 或 undefined, 它将使用全局对象替代。
+                      
