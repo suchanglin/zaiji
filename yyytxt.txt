@@ -1,7 +1,7 @@
-Vue.jsÊÇÓÃÓÚ¹¹½¨½»»¥Ê½µÄWeb½çÃæ¿â¡£Vue.js¼¯ÖĞÔÚMVVMÄ£Ê½ÉÏµÄÊÓÍ¼Ä£ĞÍ²ã£¬²¢Í¨¹ıË«ÏòÊı¾İ°ó¶¨Á¬½ÓÊÓÍ¼ºÍÄ£ĞÍ¡£
-Vue.js²»Ö§³ÖIE8¼°ÆäÒÔÏÂµÄ°æ±¾¡£
+Vue.jsæ˜¯ç”¨äºæ„å»ºäº¤äº’å¼çš„Webç•Œé¢åº“ã€‚Vue.jsé›†ä¸­åœ¨MVVMæ¨¡å¼ä¸Šçš„è§†å›¾æ¨¡å‹å±‚ï¼Œå¹¶é€šè¿‡åŒå‘æ•°æ®ç»‘å®šè¿æ¥è§†å›¾å’Œæ¨¡å‹ã€‚
+Vue.jsä¸æ”¯æŒIE8åŠå…¶ä»¥ä¸‹çš„ç‰ˆæœ¬ã€‚
 
-ÔÚÊµÀı»¯VueÊ±£¬ĞèÒª´«ÈëÒ»¸ö  Ñ¡Ïî¶ÔÏó£¬Ëü¿ÉÒÔ°üº¬ Êı¾İ Ä£°å ¹ÒÔØÔªËØ ·½·¨ ÉúÃüÖÜÆÚ¹³×Ó     
+åœ¨å®ä¾‹åŒ–Vueæ—¶ï¼Œéœ€è¦ä¼ å…¥ä¸€ä¸ª  é€‰é¡¹å¯¹è±¡ï¼Œå®ƒå¯ä»¥åŒ…å« æ•°æ® æ¨¡æ¿ æŒ‚è½½å…ƒç´  æ–¹æ³• ç”Ÿå‘½å‘¨æœŸé’©å­     
 
 var MyComponent = Vue.extend({
 
@@ -12,23 +12,23 @@ var xxoo = new MyCoponent();
 created comiled ready destroyed 
 
 
-VueÄ£°å´Ó¸ù±¾ÉÏ²»Í¬ÓÚ»ùÓÚ×Ö·û´®µÄÄ£°å¡£
+Vueæ¨¡æ¿ä»æ ¹æœ¬ä¸Šä¸åŒäºåŸºäºå­—ç¬¦ä¸²çš„æ¨¡æ¿ã€‚
 
-binding À¦°ó£¬°ó¶¨
+binding æ†ç»‘ï¼Œç»‘å®š
 
-observe ¹Û²ì£¬¼ì²â£¬¼à²â
+observe è§‚å¯Ÿï¼Œæ£€æµ‹ï¼Œç›‘æµ‹
 
-init ¿ªÊ¼£¬³õÊ¼
+init å¼€å§‹ï¼Œåˆå§‹
 
-compiled »ã±à
+compiled æ±‡ç¼–
 
-destroy Ïú»Ù£¬ÆÆ»µ
+destroy é”€æ¯ï¼Œç ´å
 
-capitalize ´óĞ´
+capitalize å¤§å†™
 
-raw Ô­ÉúµÄ£¬Î´¼Ó¹¤µÄ
+raw åŸç”Ÿçš„ï¼ŒæœªåŠ å·¥çš„
 
-literalÔ­ÒâµÄ£¬×ÖÃæµÄ
+literalåŸæ„çš„ï¼Œå­—é¢çš„
 
 v-bind v-on
 
@@ -36,7 +36,7 @@ https://cdn.bootcss.com/vue/2.2.2/vue.min.js
 
 https://unpkg.com/vue/dist/vue.js
 
-v-if template v-if  v-show(display,²»Ö§³Ötemplate) v-else v-model
+v-if template v-if  v-show(display,ä¸æ”¯æŒtemplate) v-else v-model
 v-for   $index $key
 
 push() pop() shift() unshift() splice() sort() reverse()
@@ -50,12 +50,12 @@ enter tab delete esc space up down left right
 
 el vm expression arg name modifiers descriptor 
 
-²å¼ş£ºvue-router vue-resource vue-async-data vue-validator
+æ’ä»¶ï¼švue-router vue-resource vue-async-data vue-validator
 vue-devtools  vue- touch  vue-element 
 
-vue-¼òµ¥¡¢Ò×Ñ§£¬Ö¸Áîv-xxx£¬Ò»Æ¬html´úÂëÅäºÏÉÏjson,ÔÚnew³öÀ´vueÊµÀı¡£¸öÈËÎ¬»¤ÏîÄ¿£¬ÒÆ¶¯ÏîÄ¿£¬Ğ¡ÇÉ
+vue-ç®€å•ã€æ˜“å­¦ï¼ŒæŒ‡ä»¤v-xxxï¼Œä¸€ç‰‡htmlä»£ç é…åˆä¸Šjson,åœ¨newå‡ºæ¥vueå®ä¾‹ã€‚ä¸ªäººç»´æŠ¤é¡¹ç›®ï¼Œç§»åŠ¨é¡¹ç›®ï¼Œå°å·§
 
-angular--ÉÏÊÖÄÑ£¬Ö¸Áîng-xxx£¬ËùÓĞÊôĞÔºÍ·½·¨¶¼¹ÒÔÚµ½$scope£¬PC¶Ë
+angular--ä¸Šæ‰‹éš¾ï¼ŒæŒ‡ä»¤ng-xxxï¼Œæ‰€æœ‰å±æ€§å’Œæ–¹æ³•éƒ½æŒ‚åœ¨åˆ°$scopeï¼ŒPCç«¯
 
 
-¹²Í¬µã£º²»¼æÈİµÍ°æ±¾IE
+å…±åŒç‚¹ï¼šä¸å…¼å®¹ä½ç‰ˆæœ¬IE
