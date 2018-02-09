@@ -94,6 +94,7 @@ function f() {
 }
 
 function test() {
+
 	console.log(f)
 	f()
 	f = 'hello'
@@ -104,6 +105,7 @@ test()
 
 
 function print(arr) {
+
 	for (var i in arr) {
 		if (arr[i] instanceof Array) {
 			print(arr[i])
@@ -118,4 +120,5 @@ var data = [1, [20, 21],
 		[22, 22]
 	]
 ];
+
 print(data);
