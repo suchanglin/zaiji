@@ -1,0 +1,102 @@
+
+object(Function,Date,Array)
+number
+string
+boolean
+null
+undefined
+1.23 == "1.23"
+0 == fale
+label
+NaN != NAN
+NULL == UNDEFINED
+typeof 100
+
+[1,2] instanceof Array   // true
+new Object() instanceof Array   // false
+
+duck type
+
+constructor
+
+Object.
+{}.toString
+
+<script>
+   var score=80;
+</script>
+
+原始表达式；
+
+数组，对象的初始化表达式
+
+[1,2]  new Array(1,2)
+
+函数表达式
+
+var fe=functino(){};
+
+(function(){
+  console.log("hello world");
+ })();
+
+属性访问表达式；
+
+调用表达式；
+
+var val = true? 1:2;
+var val = (1,2,3); 逗号运算符，取最后一个
+
+delete
+
+Object.definedProperty
+
+对象创建表达式
+
+没有块级的作用
+
+for(var i = 0;i < 10;i++){};
+或
+var i = 0;
+for(i < 10;i++){};
+
+var a = b = 1;
+
+try{
+   try{ throw new Error("oops");}
+
+    finally { console.log("finally");}
+
+}
+catch(ex){
+   console.error("outer",ex.message);
+}  
+
+'use strict'          arguments[0] = 100;
+!function(){}
+
+
+
+一、浏览器窗口可视区域大小：
+
+在不同浏览器都实用的 JavaScript 方案：
+
+var w = document.documentElement.clientWidth || document.body.clientWidth;
+var h = document.documentElement.clientHeight || document.body.clientHeight;
+
+二、网页尺寸scrollHeight
+
+浏览器兼容性
+
+var w = document.documentElement.scrollWidth || document.body.scrollWidth;
+var h = document.documentElement.scrollHeight|| document.body.scrollHeight;
+      
+三、网页尺寸offsetHeight
+
+offsetHeight和offsetWidth，获取网页内容高度和宽度(包括滚动条等边线，会随窗口的显示大小改变)。
+
+1、值
+offsetHeight = clientHeight + 滚动条 + 边框。
+2、浏览器兼容性
+var w = document.documentElement.offsetWidth || document.body.offsetWidth;
+var h = document.documentElement.offsetHeight || document.body.offsetHeight;
