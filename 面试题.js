@@ -9,7 +9,7 @@ console.log(a === b)
 10 + 'objects'
 '7' * '4'
 1 - 'x' //转化不了:NaN
-1 + {} //对象会toString()
+1 + {}
 true + true
 2 + null
 

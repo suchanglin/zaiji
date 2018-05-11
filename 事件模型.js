@@ -11,7 +11,7 @@ removeEventListener：移除事件的监听函数
 dispatchEvent：触发事件
 
 addEventListener()
-addEventListener方法用于在当前节点或对象上，定义一个特定事件的监听函数。
+addEventListener 方法用于在当前节点或对象上，定义一个特定事件的监听函数。
 
 // 使用格式
 target.addEventListener(type, listener[, useCapture]);
@@ -429,9 +429,7 @@ var previousY;
 var previousT;
 
 window.addEventListener('mousemove', function(event) {
-  if (!(previousX === undefined ||
-        previousY === undefined ||
-        previousT === undefined)) {
+  if (!(previousX === undefined || previousY === undefined || previousT === undefined)) {
     var deltaX = event.screenX - previousX;
     var deltaY = event.screenY - previousY;
     var deltaD = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
