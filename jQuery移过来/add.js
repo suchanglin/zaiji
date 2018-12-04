@@ -14,7 +14,9 @@
             p2 = (p2 == undefined) ? 0 : p2;
             if (p1 > p2) { //如果传入的参数前者大于后者
                 intResult = parseInt(p1) - parseInt(p2);
-            } else { intResult = -(parseInt(p2) - parseInt(p1)); }
+            } else {
+                intResult = -(parseInt(p2) - parseInt(p1));
+            }
             return intResult;
         }
     });
