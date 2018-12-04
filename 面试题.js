@@ -110,7 +110,7 @@ function test() {
 test()
 -------------------------------------------------------------------------
 
-function print(arr) {
+function print(arr) {  // 数组扁平化
 
 	for (var i in arr) {
 		if (arr[i] instanceof Array) {
@@ -120,6 +120,8 @@ function print(arr) {
 		}
 	}
 }
+
+
 var data = [1, [20, 21],
 	[
 		[11, 11],
