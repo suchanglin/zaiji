@@ -43,3 +43,5 @@ var eventUtil = {
         }
     }
 }
+
+删除
