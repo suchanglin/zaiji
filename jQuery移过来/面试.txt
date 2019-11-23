@@ -13,20 +13,7 @@ video，audio的增加使得我们不需要在依赖外部的插件就可以往�
 5、webstorage，webstorage是本地存储，存储在客户端，包括localeStorage和sessionStorage，localeStorage是持久化存储在客户端，
 只要用户不主动删除，就不会消失，sessionStorage也是存储在客户端，但是他的存在时间是一个回话，一旦浏览器的关于该回话的页面关闭了，
 sessionStorage就消失了，
-6、缓存html5允许我们自己控制哪些文件需要缓存，哪些不需要，具体的做法如下：
 
-  1、首先给html添加manifest属性，并赋值为cache.manifest
-
-  2、cache.manifest的内容为: 
-         CACHE MANIFEST
-         #v1.2
-         CACHE :           //表示需要缓存的文件
-           a.js
-           b.js
-       NETWORK:    //表示只在用户在线的时候才需要的文件，不会缓存
-         c.js
-       FALLBACK
-       /        /index.html     //表示如果找不到第一个资源就用第二个资源代替
 
 7、web worker，web worker是运行在浏览器后台的js程序，他不影响主程序的运行，是另开的一个js线程，可以用这个线程执行复杂的数据操作，
 然后把操作结果通过postMessage传递给主线程，这样在进行复杂且耗时的操作时就不会阻塞主线程了。
