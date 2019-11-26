@@ -1,7 +1,5 @@
 二、JavaScript部分
 
-（1）JavaScript的数据类型基本数据类型：Number，String，Boolean，Undefined，Null
-复杂数据类型：Object，Array，Function，RegExp，Date，Error全局数据类型：Math
 （2）JavaScript的闭包闭包简单的说就是一个函数能访问外部函数的变量，这就是闭包，比如说：function a(x){
        var tem=3;
       function b(y){
