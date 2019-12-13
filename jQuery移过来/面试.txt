@@ -1,34 +1,4 @@
-二、JavaScript部分
 
-（2）JavaScript的闭包闭包简单的说就是一个函数能访问外部函数的变量，这就是闭包，比如说：function a(x){
-       var tem=3;
-      function b(y){
-          console.log(x+y+(++tem));
-     }
-}
-a函数中的b函数就是闭包了，b函数可以使用a函数的局部变量，参数，最典型的闭包应该是下面这样，
-将定义在函数中的函数作为返回值function a(x){
-       var tem=3;
-      function b(y){
-          console.log(x+y+(++tem));
-     }
-return b;
-}
-闭包的另一种作用是隔离作用域，请看下面这段代码for(var i=0;i<2;i++){
-      setTimeout(function(){
-              console.log(i);
-        },0);
-}
-上面这段代码的执行结果是2,2而不是0,1，因为等for循环出来后，执行setTimeout中的函数时，i的值已经变成了2，这就是没有隔离作用域所造成的，
-请看下面代码for(var i=0;i<2;i++){
-      (function(i){
-             setTimeout(function(){
-              console.log(i);
-        },0)
-    })(i);
-}
-这样就会输出0,1，我们的立即执行函数创建了一个作用域，隔离了外界的作用域，闭包的缺点是，因为内部闭包函数可以访问外部函数的变量，
-所以外部函数的变量不能被释放，如果闭包嵌套过多，会导致内存占用大，要合理使用闭包。
 （3）new 操作符到底做了什么  首先，new操作符为我们创建一个新的空对象，然后this变量指向该对象，  其次，空对象的原型执行函数的原型， 
 最后，改变构造函数内部的this的指向代码如下：var obj={};
 obj.__proto__=fn.prototype;
