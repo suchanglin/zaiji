@@ -1,6 +1,10 @@
 
-（3）new 操作符到底做了什么  首先，new操作符为我们创建一个新的空对象，然后this变量指向该对象，  其次，空对象的原型执行函数的原型， 
-最后，改变构造函数内部的this的指向代码如下：var obj={};
+（3）new 操作符到底做了什么  
+首先，new操作符为我们创建一个新的空对象，然后this变量指向该对象，  
+其次，空对象的原型执行函数的原型， 
+最后，改变构造函数内部的this的指向
+代码如下：
+var obj={};
 obj.__proto__=fn.prototype;
 fn.call(obj);
 （4）改变函数内部this指针的指向函数call和apply，假设要改变fn函数内部的this的指向，指向obj，那么可以fn.call(obj);或者fn.apply(obj);
