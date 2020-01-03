@@ -1,0 +1,61 @@
+ 屏幕自适应说白了是指我们写的网页能够在不同屏幕大小的移动设备上自动调整元素的大小，常见的有几种方法，如rem自适应、使用媒体查询@media、动态设置meta viewpoint的device及minimum-scale、maximum-scale大小等方法。
+
+       1、rem自适应（js方式）
+
+        rem是相对于根元素（html）的font-size大小，因此在进行页面布局的时候采用rem单位值。
+
+在设计时根据设计稿的理想页面大小，如iphone5宽320px（此时假设设置html的font-size:10px，即1rem），当在不同的移动设备上适配时，然后计算出当前设备的宽度相对于设计稿（iphone5 320px）的缩放比比例，然后可在js代码中计算出当前设备应该设置的html元素的font-size值（width/320 * 10px）, 这样在页面显示的时候其由于采用rem值布局，那rem的值就会相对变大或变小，从而整个页面的元素都会进行相应的缩放，实现自适应的目的；
+
+(function(){
+
+  var scale = window.innerWidth/320;
+
+  document.documentElement.style.fontSize = 10*scale+"px";
+
+})()
+
+页面中需设置<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+总结： 说到底是根据不同设备计算出相对于设计稿的html的font-size大小，然后在页面布局时使用rem单位
+
+        2、 @media媒体查询设置html的font-size（css方式）
+
+     浏览器默认的font-size通常是16px，因此可以使用@media媒体查询提前设置不同屏幕大小应该使用的html的font-size值
+
+html{
+
+  font-size:62.5%;  // 10/16
+
+}
+
+@media screen and (min-width:360px) and (max-width:374px) and (orientation:portrait) {
+
+    html { font-size: 70.3%; }
+
+}
+
+@media screen and (min-width:375px) and (max-width:383px) and (orientation:portrait) {
+
+    html { font-size: 73.24%; }
+
+}
+
+总结： 说到底是根据不同设备提前设置相对于设计稿的html的font-size大小，然后在页面布局时使用rem单位
+
+3. 动态设置meta viewpoint
+
+    使用name为viewpoint的meta的device及minimum-scale、maximum-scale属性
+
+    通过js获取当前设备相对设计稿宽度的比例值，然后直接通过js的document.write()方法直接设置，不同的是这段js代码要放在<head></head>之间
+
+(function(){
+
+    var scale = screen.width/320;
+
+    document.write('<meta name="viewport" content="width=320,minimum-scale='+scale+',maximum-scale='+scale+'">')
+
+})()
+
+ 
+
+总结： 说到底是根据不同设备计算出相对于设计稿的缩放比例，然后在js代码中直接write viewpoint新属性值
