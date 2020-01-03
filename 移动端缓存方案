@@ -1,0 +1,112 @@
+移动端缓存方案
+标签（空格分隔）： 缓存 移动端
+
+Cache目的
+Cache几乎无处不在，iOS系统clean memory、dirty memory，HTTP的tag机制，都是Cache设计思想的应用。
+Cache的目的是为了追求更高的速度体验，其源头是两种数据读取方式在成本和性能上的差异。
+
+数据存储媒介
+Cache的本质，是利用空间换取时间，对数据的存储进行处理。在设计Cache之前，需要先理清数据存储的媒介。
+
+数据最开始是存储在Server上，需要通过网络请求获取。
+从Server获取数据时，会经过各种网络节点，这些节点有时会缓存我们的数据。
+APP拿到服务器的数据后，临时存储在memory中，有些数据需要存储到disk。
+Disk中数据的存储方式，会影响到读取的速度；以B+Tree存储的SQLite就比直接序列化Array到文件中快不少。
+Memory存储中，不同的数据结构存储方式也会存在速度上的差异，hash表形式存储读、写性能都比array好不少，但是空间开销比array大。
+对于Cache的理解和实践，需要我们对存储媒介、不同数据结构差异，有比较深的掌握。
+
+WEB缓存策略
+HTTP缓存规则
+浏览器端的缓存规则，是在HTTP协议头和HTML页面的Meta标签中定义，分别从新鲜度和校验值两个维度来规定浏览器是否可以直接使用缓存，还是去服务器获取新的数据。
+
+新鲜度
+新鲜度也就是过期规则，缓存副本的有效期。缓存是否有效，需要满足以下两个条件：
+
+含有完整的过期时间控制头信息（HTTP协议报头），并且仍在有效期内；
+浏览器已经使用过这个缓存，并且在一个会话中已经检查过新鲜度.
+校验值
+校验值也就是验证机制：服务器返回资源的时候有时在控制头信息带上这个资源的实体标签Etag（Entity Tag），它可以用来作为浏览器再次请求过程的校验标识。如果发现校验标识不匹配，说明资源已经被修改或者过期，浏览器需要重新请求获取资源。
+
+HTML缓存策略
+离线应用缓存Manifest
+用户可以离线访问应用，适用于无法保持联网状态的移动端用户。
+用户访问本地缓存文件，意味更快的访问速度
+仅仅加载被修改过的资源，避免同一资源对服务器多次请求，降低对服务器的访问压力
+Manifest文件清单示例：
+
+
+LocalStorage
+用于代码中的常量保存，代码示例：
+
+
+iOS缓存策略
+Memory Cache - NSCache
+Memory Cache的适用场景：数据量小，读写效率要求高，会随着APP被杀死自动释放、或者自定义释放规则。
+
+NSCache使用的几个注意点：
+
+NSCache是苹果官方提供的缓存类，具体使用和NSDictionary相似；
+NSCache在系统内存很低时会自动释放，使用的时候需要注意过期规则；
+NSCache是线程安全的，在进行多线程操作时，不需要进行加锁。
+NSCache的Key是对对象进行了Strong引用，非拷贝。
+Disk Cache
+iOS本地缓存的几种方式：
+
+NSArray、NSDictionary等数据类型直接写文件到APP的沙盒中，使用场景：图片信息；
+NSUserDefault，用来存储应用的设置信息，使用场景：APP颜色、模块配置信息；
+NSKeyedArchiver，归档操作，可以把自定义对象存储在文件中，APP中登录结束，用户信息可以作为对象存储，用于下次自动登录。
+CoreData，苹果官方推出的综合性数据库，使用ORM对象关系映射技术，将对象转换成数据，存储到本地数据库中，CoreData是完全面向对象的，执行效率相对原生数据库较差。
+SQLite，可跨平台，适用于数据量大的场景，常用于APP中列表数据。
+Android缓存策略
+LRU(Least Recently Used)，近期最少使用的算法，它的核心思想是当缓存满时，会优先淘汰那些近期最少使用的缓存对象。Android官方推荐使用LrhCache和DisLruCache作为Android缓存策略的解决方案，分别用于实现内存缓存、硬盘缓存，其核心思想都是LRU缓存算法。
+
+LRU Cache原理
+LruCache是个泛型类，主要算法原理是把最近使用的对象用强引用（即我们平常使用的对象引用方式）存储在 LinkedHashMap 中。当缓存满时，把最近最少使用的对象从内存中移除，并提供了get和put方法来完成缓存的获取和添加操作。
+
+LruCache中维护了一个集合LinkedHashMap，该LinkedHashMap是以访问顺序排序的。当调用put()方法时，就会在结合中添加元素，并调用trimToSize()判断缓存是否已满，如果满了就用LinkedHashMap的迭代器删除队尾元素，即近期最少访问的元素。当调用get()方法访问缓存对象时，就会调用LinkedHashMap的get()方法获得对应集合元素，同时会更新该元素到队头。
+
+代码示例：
+
+
+package com.example.linux.lrucachetest;
+
+import android.graphics.Bitmap;
+import android.util.LruCache;
+
+/**
+ * Created by huhx on 2016/4/12.
+ */
+public class ImageDownloader {
+    private static final String TAG = "TextDownload";
+    private LruCache<String, Bitmap> lruCache;
+
+    public ImageDownloader() {
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        int cacheSize = (int) (maxMemory / 8);
+        lruCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap value) {
+                return value.getByteCount();
+            }
+        };
+    }
+
+    // 把Bitmap对象加入到缓存中
+    public void addBitmapToMemory(String key, Bitmap bitmap) {
+        if (getBitmapFromMemCache(key) == null) {
+            lruCache.put(key, bitmap);
+        }
+    }
+
+    // 从缓存中得到Bitmap对象
+    public Bitmap getBitmapFromMemCache(String key) {
+　　　　Log.i(TAG, "lrucache size: " + lruCache.size());
+        return lruCache.get(key);
+    }
+
+    // 从缓存中删除指定的Bitmap
+    public void removeBitmapFromMemory(String key) {
+        lruCache.remove(key);
+    }
+}
+
