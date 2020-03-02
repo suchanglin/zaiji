@@ -1,0 +1,21 @@
+(function($, window, document) {
+
+  function go(num) {
+  }
+
+  function handleEvents() {
+  }
+
+  function initialize() {
+  }
+
+  function dieCarouselDie() {
+  }
+
+  //attach to the global scope
+  window.finalCarousel = {
+    init : initialize,
+    destroy : dieCarouselDie
+  }
+
+})( jQuery, window, document );
