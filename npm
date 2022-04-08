@@ -1,0 +1,3 @@
+包更新之后，重新发布命令
+npm version patch
+npm publish
