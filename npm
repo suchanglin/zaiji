@@ -1,3 +1,8 @@
 包更新之后，重新发布命令
 npm version patch
 npm publish
+
+
+nvm  管理node
+
+nrm  管理npm
