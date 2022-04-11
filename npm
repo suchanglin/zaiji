@@ -6,3 +6,5 @@ npm publish
 nvm  管理node
 
 nrm  管理npm
+
+npx干嘛？
